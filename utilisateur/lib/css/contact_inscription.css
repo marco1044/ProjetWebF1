@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-nov.-2016, 18:44:50
+    Author     : Marco
+*/
+
+p{
+    margin-top: 3%;
+    color : white;
+    font-style: italic;
+}
+	
+#contenu{
+padding: 10px;
+font-size: 0.85em;
+text-align: center;
+text-indent:1em;
+height: 200px;
+}
+/*
+#contenu2{
+padding: 10px;
+font-size: 0.85em;
+text-align: center;
+text-indent:1em;
+height: 200px;
+}
+*/
+#form_contact {
+    border-style: solid;
+    color: white;
+}
+/*
+#form_inscri {
+    border-style: solid;
+    color: white;
+}
+*/
+.txtContact{
+    color: white;
+    font-size: 150%;
+}
+/*
+.txtInscri{
+    color: white;
+    font-size: 150%;
+}
+*/
+input,textarea {
+  background-color :#778899;
+
+}
+
