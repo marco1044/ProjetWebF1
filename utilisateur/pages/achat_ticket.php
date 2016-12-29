@@ -1,68 +1,139 @@
-<h2 id="titre_page"> Catalogue </h2>
+<div id="contenu">
+
+</div>
 <?php
-if (isset($_GET['submitcatalogue'])) {
+if (isset($_GET['submit_compte'])) {
     extract($_GET, EXTR_OVERWRITE);
-    echo 'id_client : + $id_client + achat: + $achat';
-    if (trim($id_client) != '') {
-        $mg2 = new achatManager($db);
-        $retour = $mg2->getAchat($_GET);
-        if ($retour == 1) {
-            $texte = "<span class='txtC'>Demande enregistrée.</span>";
+    if (trim($prenom) != '' && trim($nom) != '' && trim($GPchoisi) != '' && trim($NbreTicket)) {
+        $mg2 = new creercompteManager($db);
+        $retour = $mg2->addClient($_GET);
+        if ($retour >= 0) {
+            $texte = "<span class='txtGras'>Demande enregistrée.</span>";
+            print '$texte';
         }
         if (isset($_SESSION['form'])) {
             unset($_SESSION['form']);
-        } else {
-            $texte = "Complétez tous les champs.";
-            if (trim($id_client) != '') {
-                $_SESSION['form']['id_client'] = $id_client;
-            }
+        }
+    } else {
+        $texte = "Complétez tous les champs.";
+        if (trim($nom_cc) != '') {
+            $_SESSION['form']['prenom'] = $prenom;
+        }
+        if (trim($pren_cc) != '') {
+            $_SESSION['form']['nom'] = $nom;
+        }
+        if (trim($adresse_cc) != '') {
+            $_SESSION['form']['GPchoisi'] = $GPchoisi;
+        }
+        if (trim($ville_cc) != '') {
+            $_SESSION['form']['NbreTicket'] = $NbreTicket;
         }
     }
 }
 ?>
-<section id="resultat"><?php if (isset($texte)) print $texte; ?></section>
-<form id="formachat" action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
-    <table class='tabC'>
-        <tr>
-            <?php/*
-            $cm = new catManager($db);
-            $cat = $cm->getCat($_GET);*/
-            ?>
-            <td>
-                <?php if (isset($_SESSION['form']['id_client'])) { ?>
-                    <input type="text" name="id_client" id="id_client" value="<?php print $_SESSION['form']['id_client']; ?>"/>
-                    <?php
-                } else {
-                    ?>
-                    <input type="text" name="id_client" id="id_client" placeholder="Votre identifiant" required/>
-                    <?php
-                }
-                ?>
-            </td>
-        </tr>
 
-        <tr><td id="tabCat">Titre</td><td id="tabCat">Prix</td><td id="tabCat">Genre</td><td id="tabCat">Réalisateur</td><td id="tabCat">Support</td><td id="tabCat">Commander</td></tr>
-        <?php/*
-        for ($i = 0; $i < count($cat); $i++) {
-            $titre = $cat[$i]->titre;
-            $prix = $cat[$i]->prix;
-            $genre = $cat[$i]->genre;
-            $realisateur = $cat[$i]->realisateur;
-            $support = $cat[$i]->support;
-            $idd = $cat[$i]->iddvd;
-            $nom = "achat";
-            $id = "cc";
-            $ty = "radio";
-            print "<tr><td id='tabCat'>{$titre}</td><td id='tabCat'>{$prix}</td><td id='tabCat'>{$genre}</td><td id='tabCat'>{$realisateur}</td><td id='tabCat'>{$support}</td><td id='tabCat'><input type={$ty} name={$nom} id={$id} value={$idd}/></td></tr>";
-        }*/
-        ?>
-        <tr> 
-            <td></td><td></td><td></td><td></td><td></td><td></td>  <td colspan="2">
 
-                <input type="submit" name="submitcatalogue" id="submitcatalogue" value="Acheter"/>
-                &nbsp;&nbsp;&nbsp;
-            </td>
-        </tr>
-        <a id='pdf' href="index.php?page=printcat">Cliquez ici pour le PDF du catalogue</a>
-    </table>
-</form>
+
+<div id="contenu2">
+    <form id="form_contact">
+        <fieldset>
+            <legend class="txtContact">Achat de tickets</legend>
+            <table id="tabContact">
+                <tr>
+                    <td>Prenom</td>
+                    <td>
+                        <?php if (isset($_SESSION['form']['prenom'])) { ?>
+                            <input type="text" name="prenom" id="prenom" value="<?php print $_SESSION['form']['prenom']; ?>"/>
+                            <?php
+                        } else {
+                            ?>
+                            <input type="text" name="prenom" id="prenom" placeholder="Prenom" required/>
+                            <?php
+                        }
+                        ?><br/><br/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Nom</td>
+                    <td>
+                        <?php if (isset($_SESSION['form']['nom'])) { ?>
+                            <input type="text" name="nom" id="prenom" value="<?php print $_SESSION['form']['nom']; ?>"/>
+                            <?php
+                        } else {
+                            ?>
+                            <input type="text" name="nom" id="nom" placeholder="nom" required/>
+                            <?php
+                        }
+                        ?><br/><br/>
+                    </td>
+                </tr>
+
+                <tr>
+                     <td>Nom du GP</td>
+                    <td>
+                        <?php if (isset($_SESSION['form']['GPchoisi'])) { ?>
+                            <input type="text" name="GPchoisi" id="GPchoisi" value="<?php print $_SESSION['form']['GPchoisi']; ?>"/>
+                            <?php
+                        } else {
+                            ?>
+                            <form><select type="text" name="GPchoisi"size="1" id="GPchoisi" placeholder="GPchoisi" required/>
+                            <OPTION>Australie  <OPTION>Bahreïn  <OPTION>Chine <OPTION>Russie
+                            <OPTION>Espagne <OPTION>Monaco <OPTION>Canada <OPTION>Europe
+                            <OPTION>Autriche <OPTION>Grande-Bretagne <OPTION>Hongrie <OPTION>Allemagne
+                            <OPTION>Belgique <OPTION>Italie <OPTION>Singapour <OPTION>Malaisie
+                            <OPTION>Japon <OPTION>Etas-Unis <OPTION>Mexique <OPTION>Brésil <OPTION>Abu Dhabi
+                            </select></form>
+                            <?php
+                        }
+                        ?><br/><br/>
+
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Quantité</td>
+                    <td>
+                        <?php if (isset($_SESSION['form']['NbreTicket'])) { ?>
+                            <input type="text" name="NbreTicket" id="ville_cc" value="<?php print $_SESSION['form']['NbreTicket']; ?>"/>
+                            <?php
+                        } else {
+                            ?>
+                            <input type="text" name="NbreTicket" id="NbreTicket" placeholder="NbreTicket" required/>
+                            <?php
+                        }
+                        ?><br/><br/>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="submit" name="submit_reserv" id="submit_reserv" value="Acheter" />
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="reset" id="reset" value="Remise à zéro du formulaire" />
+                    </td>
+                </tr>
+
+            </table>
+        </fieldset>
+    </form>
+</div>
+
+
+
+
+
+<?php
+if (isset($_POST['Envoyer'])) {
+    if ($_POST['prenom'] != "" && $_POST['nom'] != "" && $_POST['GPchoisi'] != "" && $_POST['NbreTicket'] != "" ) {// Vérif case vide
+        $query = "insert into membres(nom,prenom,adresse,ville,pays) 
+            values('" . $_POST['prenom'] . "','" . $_POST['nom'] . "','" . $_POST['GPchoisi'] . "','". $_POST['NbreTicket'] .  "')";
+        $result = pg_query($cnx, $query);
+        echo "Votre formulaire a bien été envoy&eacute;e.";
+    } else {
+        echo "votre formulaire est incomplet";
+    }
+}
+?>

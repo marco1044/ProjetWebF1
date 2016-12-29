@@ -1,8 +1,9 @@
 <!doctype html>
 
 <?php
+
 include ('./lib/php/Jliste_include.php');
-$cnx = connexion::getInstance($dsn, $user, $pass);
+$cnx = Connexion::getInstance($dsn, $user, $pass);
 
 session_start();
 ?>
@@ -12,12 +13,6 @@ session_start();
         <title>Bienvenue sur mon site de F1 </title>  
         <link rel="stylesheet" type="text/css" href="../admin/lib/css/bootstrap-3.3.7/dist/css/bootstrap.css"/>
 
-         <?php
-        /*foreach ($styles as $css) {
-            ?><link rel="stylesheet" type="text/css" href="<?php print $css; ?>"/>
-            <?php
-        }*/
-        ?>
         
         <link rel="stylesheet" type="text/css" href="./lib/css/page_styles.css"/>
         <link rel="stylesheet" type="text/css" href="./lib/css/contact_inscription.css" />
