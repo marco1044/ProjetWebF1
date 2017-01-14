@@ -141,6 +141,9 @@ if (isset($_GET['submit_compte'])) {
 
 
 <?php
+$cnx = Connexion::getInstance($dsn, $user, $password);
+
+extract($_GET);
 if (isset($_POST['Envoyer'])) {
     if ($_POST['nom'] != "" && $_POST['prenom'] != "" && $_POST['adresse'] != "" && $_POST['ville'] != "" && $_POST['pays'] != "") {// Vérif case vide
         $query = "insert into membres(nom,prenom,adresse,ville,pays) 

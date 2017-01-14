@@ -3,7 +3,7 @@
 <?php
 
 include ('./lib/php/Jliste_include.php');
-$cnx = Connexion::getInstance($dsn, $user, $pass);
+$cnx = Connexion::getInstance($dsn, $user, $password);
 
 session_start();
 ?>

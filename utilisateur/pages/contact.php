@@ -102,11 +102,25 @@ if (isset($_GET['submit_reserv'])) {
 
 
 <?php
+$cnx = Connexion::getInstance($dsn, $user, $password);
+
+extract($_GET);
+
 if (isset($_POST['Envoyer'])) {
+    $_db = $cnx;
     if ($_POST['nom'] != "" && $_POST['email'] != "" && $_POST['texte'] != "") {// Vérif case vide
+        $query="select idcontact from contact where nom = :nom";
+        $resultset = $_db->prepare($query);
+        $resultset->bindValue(':nom', $_GET['enom']);
+        $resultset->execute();
+        $data = $resultset->fetch();
+        $_SESSION['nom'] = $data['idcontact'];
+        
         $query = "insert into contact(nom,email,texte) 
             values('" . $_POST['nom'] . "','" . $_POST['e'] . "','" . $_POST['texte'] . "')";
-        $result = pg_query($cnx, $query);
+         $resultset = $_db->prepare($query);
+        $resultset->execute();
+        $data = $resultset->fetchAll();
         echo "Votre formulaire a bien été envoy&eacute;e.";
     } else {
         echo "votre formulaire est incomplet";

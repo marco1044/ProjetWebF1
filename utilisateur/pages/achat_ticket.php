@@ -126,14 +126,33 @@ if (isset($_GET['submit_compte'])) {
 
 
 <?php
+$cnx = Connexion::getInstance($dsn, $user, $password);
+
+extract($_GET);
 if (isset($_POST['Envoyer'])) {
+    
+    $_db = $cnx;
     if ($_POST['prenom'] != "" && $_POST['nom'] != "" && $_POST['GPchoisi'] != "" && $_POST['NbreTicket'] != "" ) {// Vérif case vide
-        $query = "insert into membres(nom,prenom,adresse,ville,pays) 
+        $query="select idticket from ticket where prenom = :prenom";
+        $resultset = $_db->prepare($query);
+        $resultset->bindValue(':prenom', $_GET['prenom']);
+        $resultset->execute();
+        $data = $resultset->fetch();
+        $_SESSION['prenom'] = $data['idticket'];
+        
+        
+        $query = "insert into tickets(prenom,nom,GPchoisi,NbreTicket) 
             values('" . $_POST['prenom'] . "','" . $_POST['nom'] . "','" . $_POST['GPchoisi'] . "','". $_POST['NbreTicket'] .  "')";
-        $result = pg_query($cnx, $query);
+        
+        $resultset = $_db->prepare($query);
+        $resultset->execute();
+        $data = $resultset->fetchAll();
+        
         echo "Votre formulaire a bien été envoy&eacute;e.";
     } else {
         echo "votre formulaire est incomplet";
     }
 }
 ?>
+
+        
