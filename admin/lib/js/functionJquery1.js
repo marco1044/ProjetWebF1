@@ -18,7 +18,7 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 data: "login=" + login + "&password=" + password, // si pas sérialisé
-                url: './lib/php/ajax/AjaxSeConnecter.php',
+                url: './lib/php/ajax/AjaxConnexion.php',
                 success: function (data_du_php)
                 {
                     if (data_du_php.ret == 1)

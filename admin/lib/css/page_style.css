@@ -1,0 +1,104 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 janv. 2017, 18:53:15
+    Author     : Marco
+*/
+/****************** ADMIN ********************/
+/********** general *********************/
+.bDec{
+    position: absolute;
+    text-transform: uppercase;
+    margin-left: 350px;
+    margin-top: 20px;
+}
+/********** authentification *************/
+/* structure générale */
+	
+#contenu{
+padding: 10px;
+font-size: 0.85em;
+text-align: center;
+text-indent:1em;
+height: 200px;
+}
+
+.txtContact{
+    color: white;
+    font-size: 150%;
+}
+
+accueil {
+    margin-top: 30px;
+}
+body,html{
+
+   background: url("http://www.gamejuegos.net/wp-content/uploads/2e3e89a5b3e60681b52f3acbf3bf14b299c07706_crop1600x1200-1-1024x768.jpg")no-repeat center center fixed; 
+   background-size: cover;
+   
+}
+img {
+    width: 65%;
+    text-align:center;
+    margin : 0 auto ;
+    padding:0px;
+
+}
+
+header {
+    padding : 1.2em ;
+    height: 30%;
+    text-align:center;
+    padding:15px;
+    
+}
+
+.txtAuth{
+    color: brown;
+}
+#auth{
+    font-size: 125%;
+    text-transform: uppercase;
+    background-color: white;
+}
+.bAth{
+    font-size: 150%;
+}
+
+#login_form
+{
+    width : 50%;
+    height : 135px;
+    margin-left: 25%;
+    margin-top : 5%;
+    background-color: white;
+}
+/********** accueil *****************/
+.txtAdminA{
+    color: red;
+    background-color: white;
+}
+.txtAdmin{
+    background-color: greenyellow;
+    color: cadetblue;
+    font-size: 115%;
+}
+/********** ajoutCalendrier **************/
+.tabDvd{
+    text-align: center;    
+    margin: auto;  
+    background-color: window;
+}
+.txtDvd{
+    color: springgreen;
+    background-color: white;
+    font-size: 150%;
+}
+.titreDvd{
+    font-style: italic;
+    color: blueviolet;
+    background-color: darkgray;
+}

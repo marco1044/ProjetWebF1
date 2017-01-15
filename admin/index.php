@@ -1,85 +1,108 @@
 <!doctype html>
 <?php
-include ('./lib/php/adm_liste_include.php');
-$cnx = Connexion::getInstance($dsn, $user, $pass);
 
+include ('./lib/php/adm_liste_include.php');
+$db = Connexion::getInstance($dsn, $user, $password);
 session_start();
+$styles = array();
+$i2 = 0;
+foreach (glob('./lib/css/*.css') as $css) {
+    $styles[$i2] = $css;
+    $i2++;
+}
+$scripts = array();
+$i = 0;
+foreach (glob('./lib/js/jquery/*.js') as $js) {
+    $fichierJs[$i] = $js;
+    $i++;
+}
 ?>
+
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="./lib/css/bootstrap-3.3.7/dist/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="./lib/css/gt_ecole.css"/>
-        <script type="text/javascript" src="./lib/js/jquery-3.1.1.js"></script>
-        <script type="text/javascript" src="./lib/css/bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+        <title>Formula 1 Administration</title>
+        <meta charset='UTF-8'/>    
+        <link rel="stylesheet" type="text/css" href="./lib/css/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="./lib/css/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css"/>
+        <?php
+        foreach ($styles as $css) {
+            ?><link rel="stylesheet" type="text/css" href="<?php print $css; ?>"/>
+            <?php
+        }
+        ?>
+        <link rel="stylesheet" type="text/css" href="../utilisateur/lib/css/page_style.css"/>
+        <link rel="stylesheet" type="text/css" href="./lib/css/mediaqueries.css"/>
+        <?php
+        foreach ($fichierJs as $js) {
+            ?><script type="text/javascript" src="<?php print $js; ?>"></script>
+            <?php
+        }
+        ?>
+            <script type="text/javascript" src="./lib/js/functionJquery1.js"></script> 
     </head>
-    <body>
+
+    <body>    
         <header>
             <div class="container">
                 <img src="../admin/images/F1_banniere.jpg" alt="Formula1"/>
-            </div>
-        </header>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <nav>
-                        <?php
-                        if (!isset($_SESSION['admin'])) {
-                            if (file_exists('./lib/php/admin_connect.php')) {
-                                include('./lib/php/admin_connect.php');
-                            }
-                        } else {
-                            if (file_exists('./lib/php/admn_menu.php')) {
-                                include('./lib/php/admn_menu.php');
-                            }
-                        }
-                        ?>
-                    </nav>  
-                </div> 
-                <div class="col-sm-10">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <?php
-                            if(isset($_SESSION['admin'])) { ?>
-                                <a href="./index.php?page=disconnect" class="pull-right margin1">D&eacute;connexion</a>
-                            <?php
-                            }
-                            else {
-                                ?>
-                                <a href="./index.php" class="pull-right">Connexion</a>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2 class="txtRouge">Formula 1 Administration</h2>
-                        </div>
-                    </div>
+                 <section id="deconnexion"> 
 
                     <?php
-                    if (!isset($_SESSION['admin'])) {
-                            $_SESSION['page'] = "admin_connect";                   
-                    } else {
-                        if(isset($_SESSION['page'])){
-                            $_SESSION['page'] = "accueil_admin";
+                    if (isset($_SESSION['admin'])) {
+                        ?><a href="./lib/php/disconnect.php" class="bDec">Déconnexion</a>
+                        <?php
+                    }
+                    ?>
+            </div>
+        </header>
+            
+
+            <?php if (!isset($_SESSION['admin'])) {
+                ?>
+                <section id="login_form">
+                    <?php
+                    require './pages/ConnexionAdmin.php';
+                    ?> </section><?php
+            } else {
+                ?>
+                <section id="exemple">
+   
+                        <ul class="nav">
+
+                            <?php
+                            if (file_exists('./lib/php/menu.php')) {
+                                include ('./lib/php/menu.php');
+                            }
+                            ?>
+
+                        </ul>
+
+                </section>
+
+                <section id="all">
+
+
+                        <?php
+                        if (!isset($_SESSION['page'])) {
+                            $_SESSION['page'] = "accueil";
                         }
                         if (isset($_GET['page'])) {
                             $_SESSION['page'] = $_GET['page'];
                         }
-                    }
-                    $path = './pages/' . $_SESSION['page'] . '.php';
-                    if (file_exists($path)) {
-                        include($path);
-                    } else {
-                        print "Page introuvable";
-                    }
-                    ?>
-                </div>
-            </div>
-            <footer>               
-                © Infos F1 - Copyright 2017.
-            </footer>
-        </div>
+                        $chemin = './pages/' . $_SESSION['page'] . '.php';
+                        if (file_exists($chemin)) {
+
+                            include ($chemin);
+                        }
+                        ?>                      
+                    
+
+                </section>		
+
+                <footer id="footerAc">© Infos F1 - Copyright 2017.</footer>
+    <?php
+}
+?>
     </body>
 </html>
+

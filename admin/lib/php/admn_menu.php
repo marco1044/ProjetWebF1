@@ -3,17 +3,17 @@
         <span class="txtGras">Administration</span><br/><br/>
     </div>
 </div>
-<div class="row">     
-    <div class="col-sm-11"><span class="glyphicon glyphicon-chevron-right"></span>
-        &nbsp;
-    <a href="./index.php?page=catalogue" class="txtGras">Produits</a>
+<div class="row">
+    <div class="col-xs-4 col-md-4 ">
+    <span class="glyphicon glyphicon glyphicon-road"></span>&nbsp;
+    <a id="tetjquery" href="./index.php?page=accueil" class="txtGras">Accueil</a>
     </div>
-    <div class="col-sm-11"><span class="glyphicon glyphicon-chevron-right"></span>
-        &nbsp;
-       <a href="./index.php?page=commande" class="txtGras">Gestion commande</a>
+    <div class="col-xs-4 col-md-4 ">
+    <span class="glyphicon glyphicon glyphicon-road"></span>&nbsp;
+    <a id="tetjquery" href="./index.php?page=AjoutCalendrier" class="txtGras">Ajout calendrier</a>
     </div>
-    <div class="col-sm-11"><span class="glyphicon glyphicon-chevron-right"></span>
-        &nbsp;
-       <a href="./index.php?page=recherche" class="txtGras">Recherche</a>
+    <div class="col-xs-4 col-md-4 ">
+    <span class="glyphicon glyphicon glyphicon-road"></span>&nbsp;
+    <a id="tetjquery" href="./index.php?page=accueil" class="txtGras">Accueil</a>
     </div>
 </div>
